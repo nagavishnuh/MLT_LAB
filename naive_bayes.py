@@ -14,15 +14,16 @@ from sklearn.metrics import accuracy_score
 from sklearn.naive_bayes import GaussianNB
 from sklearn.preprocessing import LabelEncoder
 
-data = load_iris()
-X = data.data
-y = data.target
+data = pd.read_csv("naive_dataset.csv")
+X = data.iloc[:,:-1].values
+y = data.iloc[:,-1].values
 
 le = LabelEncoder()
-X[:,0] = le.fit_transform(X[:,0])
 X[:,1] = le.fit_transform(X[:,1])
 X[:,2] = le.fit_transform(X[:,2])
 X[:,3] = le.fit_transform(X[:,3])
+X[:,4] = le.fit_transform(X[:,4])
+y = le.fit_transform(y)
 
 x_train,x_test,y_train,y_test = train_test_split(X,y,test_size = 0.3)
 
